@@ -53,12 +53,13 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    tabPanel("DIVERSITY OF ARTISTS AND ARTWORKS",
                             sidebarLayout(
                                 sidebarPanel(
-                                    h2('Hi... text here')
+                                    h2('put text here')
                                 ),
                                 mainPanel(
                                   tabsetPanel(type = "tabs",
                                               tabPanel("Artists", 
                                                        plotOutput("Gender_Pie"),
+                                                       plotOutput("Age_Hist"),
                                                        plotlyOutput("Nat_Sunburst")),
                                               tabPanel("Artworks", 
                                                        h2('categories'))
@@ -83,7 +84,6 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                                      selected = c("Drawings & Prints",
                                                                   "Photography")),
                                   
-            
                                 ),
                                 mainPanel(
                                   textOutput("txt"),
