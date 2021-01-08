@@ -20,24 +20,34 @@ shinyServer(function(input, output, session) {
     # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
     #Gender Pie Chart
     output$Gender_Pie <-renderPlot({
-        pie_race_data <- data.frame(
-            group=c('Male','Female','Non-Binary'),
-            value=c(genders[2,2],genders[1,2],genders[3,2])
-        )
-        pie_race_data <- pie_race_data %>% 
-            arrange(desc(group)) %>%
-            mutate(prop = value / sum(pie_race_data$value) *100) %>%
-            mutate(ypos = cumsum(prop)- 0.5*prop)
+        bp<- ggplot(pie_gender_data, aes(x="", y=value, fill=group))+
+            geom_bar(width = 1, stat = "identity")
         
-        ggplot(pie_race_data, aes(x="", y=value, fill=group)) +
-            geom_bar(stat="identity", width=1) +
-            coord_polar("y", start=0) +
-            theme_void() +
-            labs(title = 'Gender') +
-            theme(plot.title = element_text(hjust = 0.5, size = 14,face="bold")) +
+        pie <- bp + coord_polar("y", start=0)
+        
+        pie + blank_theme +
+            labs(title = "Gender of Artists") +
+            theme(axis.text.x=element_blank(),
+                  plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
+                  legend.title=element_blank(), 
+                  legend.text=element_text(size=18)) +
             scale_fill_manual(values=c( "#FF5733", "#33B0FF", "#04263B"))
     })
     
+    #Age Histogram
+    Date_Made_Years <- filter(Moma_Artworks, Age_when_made<98)
+    Date_Made_Years <- filter(Date_Made_Years, Age_when_made>10)
+    
+    output$Age_Hist <-renderPlot({
+        ggplot(Date_Made_Years, aes(x=Age_when_made)) + 
+            geom_histogram(color="black", fill="lightblue", binwidth=5) +
+            ggtitle("Age of Artist when Art was Made") +
+            xlab("Age") +
+            ylab("Number of Artists")
+    })
+    
+    
+    #Sunburst Chart
     output$Nat_Sunburst <- renderPlotly(
         plot1 <- plot_ly(Moma_Artworks,
         #fig <- plot_ly(Moma_Artworks, x = ~Department, y = ~Artist_Born, type = 'bar', name = 'Trying Something') 
@@ -46,7 +56,6 @@ shinyServer(function(input, output, session) {
             values = ~Nat_Counts,
             type = 'sunburst'
         )
-        
         
     )
     
