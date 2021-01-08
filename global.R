@@ -8,12 +8,15 @@ library(tm)
 library(wordcloud)
 library(memoise)
 library(data.table)
+library(scales)
+library(hrbrthemes)
+library(circlepackeR) 
 options(scipen = 999)
 
 
 #Load in MOMA Data
 Moma_Artworks <- read.csv(file = 'data/Moma_Artworks_Cleaned.csv')
-#View(Moma_Artworks)
+View(Moma_Artworks)
 
 Moma_Artists <- read.csv(file = 'data/Moma_Artists_Cleaned.csv')
 #View(Moma_Artists)
@@ -21,8 +24,20 @@ Moma_Artists <- read.csv(file = 'data/Moma_Artists_Cleaned.csv')
 genders <- Moma_Artworks %>% count(Gender)
 
 
+pie_gender_data <- data.frame(
+  group=c('Male = 85.3%','Female = 14.7%','Non-Binary = 0.01%'),
+  value=c(genders[2,2],genders[1,2],genders[3,2])
+)
 
-
+blank_theme <- theme_minimal()+
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.border = element_blank(),
+    panel.grid=element_blank(),
+    axis.ticks = element_blank(),
+    #plot.title=element_text(size=14, face="bold")
+  )
 
 #Making Counts by Class and year df
 Class_Counts <- Moma_Artworks%>%
