@@ -9,8 +9,9 @@ library(wordcloud)
 library(memoise)
 library(data.table)
 library(scales)
-library(hrbrthemes)
-library(circlepackeR) 
+library(treemap)
+#library(hrbrthemes)
+#library(circlepackeR) 
 options(scipen = 999)
 
 
@@ -121,36 +122,39 @@ d1 <- data.frame(final_m)
 
 
 
+#Getting df ready for Sunburst
+sun_df2 <- Moma_Artworks%>%
+  select(Region, Nationality)%>%
+  group_by(Region)%>%
+  count(Region, Nationality, sort = TRUE)
+#View(sun_df2)
 
+#aggregate(sun_df2$n, by=list(Category=sun_df2$Region), FUN=sum)
+index <- c('Asia','Africa','Middle East',
+           'North and South America',
+           'Europe', 'Australia and Pacific')
 
+values <- c("fef3d9","#add8e6",
+            "#ffa07a","#ceead1",
+            "3ece1d4","#d0b3db")
 
+sun_df2$col1 <- values[match(sun_df2$Region, index)]
 
+#View(sun_df2)
+Nationality <- c('Asia','Africa','Middle East',
+                 'North and South America',
+                 'Europe', 'Australia and Pacific')
 
+Region <- c("","","",
+            "","","")
 
+n <- c(2834,1155,517,60784,53514,257)
 
+col1 <- c("fef3d9","#add8e6",
+          "#ffa07a","#ceead1",
+          "#ece1d4","#d0b3db")
 
+#data_to_combine <- data.frame(Nationality, Region, Nat_Counts)
+data_to_combine <- data.frame(Nationality, Region, n, col1)
 
-
-
-
-#Romeo WOrd Cloud Example
-text<-list("This is my first book.
-       And it is short movie movie.", "And this is my second book. 
-           It is a little bit longer, finally. 9 ", "Finally the third. 
-           It is a movie not a book.")
-myCorpus = Corpus(VectorSource(text))
-myCorpus = tm_map(myCorpus, content_transformer(tolower))
-myCorpus = tm_map(myCorpus, removePunctuation)
-myCorpus = tm_map(myCorpus, removeNumbers)
-myCorpus = tm_map(myCorpus, removeWords,
-                  c(stopwords("SMART"), "it", "is"))
-#myCorpus
-myDTM = TermDocumentMatrix(myCorpus,
-                           control = list(minWordLength = 1))
-myDTM
-m = as.matrix(myDTM)
-#View(m)
-sort(rowSums(m), decreasing = TRUE)
-d <- data.frame(m)
-wordcloud(rownames(d),m[,1],c(8,.3),0,,TRUE,TRUE,.15,colors=brewer.pal(8, "Dark2"))
-
+sun_df <- rbind(sun_df2,data_to_combine)
