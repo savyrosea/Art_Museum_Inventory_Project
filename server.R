@@ -3,6 +3,8 @@ shinyServer(function(input, output, session) {
     
     #******** 0. ABOUT ***********
     # Make the word cloud drawing predictable during a session
+
+    
     output$wordcloud_plot <- renderPlot({
         wordcloud_rep <- repeatable(wordcloud)
 
@@ -10,7 +12,11 @@ shinyServer(function(input, output, session) {
         d2 <- final_m[,input$decade_selection]
         
         #wordcloud(rownames(d1),final_m[,as.numeric(input$decade_selection)],c(8,.3),3,,TRUE,TRUE,.15,colors=brewer.pal(8, "Dark2"))
-        wordcloud(rownames(d1),final_m[,as.numeric(input$decade_selection)],c(6,.2),input$freq,input$max,TRUE,TRUE,.15,colors=brewer.pal(8, "Dark2"))
+        wordcloud(rownames(d1),
+                  final_m[,as.numeric(input$decade_selection)],
+                  c(5,.15),input$freq,
+                  input$max,TRUE,TRUE,.15,
+                  colors=brewer.pal(8, "Dark2"))
     })
     
     # ********** 1. DISCREPANCIES IN THE DATA TAB **********
@@ -21,7 +27,7 @@ shinyServer(function(input, output, session) {
     #Gender Pie Chart
     output$Gender_Pie <-renderPlot({
         bp<- ggplot(pie_gender_data, aes(x="", y=value, fill=group))+
-            geom_bar(width = 1, stat = "identity")
+            geom_bar(width = 1, stat = "identity", color = 'black')
         
         pie <- bp + coord_polar("y", start=0)
         
@@ -30,8 +36,8 @@ shinyServer(function(input, output, session) {
             theme(axis.text.x=element_blank(),
                   plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
                   legend.title=element_blank(), 
-                  legend.text=element_text(size=18)) +
-            scale_fill_manual(values=c( "#FF5733", "#33B0FF", "#04263B"))
+                  legend.text=element_text(size=16)) +
+            scale_fill_manual(values=c( "#ffa07a", "#add8e6", "#04263B"))
     })
     
     #Age Histogram
@@ -43,32 +49,31 @@ shinyServer(function(input, output, session) {
             geom_histogram(color="black", fill="lightblue", binwidth=5) +
             ggtitle("Age of Artist when Art was Made") +
             xlab("Age") +
-            ylab("Number of Artists")
+            ylab("Number of Artists") +
+            theme(plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
+                  axis.title.x = element_text(size = 14),
+                  axis.title.y = element_text(size = 14))
     })
     
     
     #Sunburst Chart
     output$Nat_Sunburst <- renderPlotly(
-        plot1 <- plot_ly(Moma_Artworks,
-        #fig <- plot_ly(Moma_Artworks, x = ~Department, y = ~Artist_Born, type = 'bar', name = 'Trying Something') 
-            labels = ~Nationality,
-            parents = ~Region,
-            values = ~Nat_Counts,
-            type = 'sunburst'
-        )
+        
+        plot_ly(sun_df,
+                #ids = sun_df$Nationality,
+                labels = sun_df$Nationality,
+                parents = sun_df$Region,
+                values = sun_df$n,
+                # sunburstcolorway = sun_df$col1,
+                type = 'sunburst',
+                branchvalues = 'total')
+        
         
     )
     
     
     
     # ********** 3. TIME SERIES DATA TAB **********
-    
-    output$txt <- renderText({
-        classes_text <- paste(input$Dep_Input, collapse = ", ")
-        paste("You chose", classes_text)
-    })
-    
-    
     d <- reactive({
         filtered <-
             Class_Counts %>%
@@ -78,11 +83,14 @@ shinyServer(function(input, output, session) {
     
     output$Dep_plot <- renderPlot({
         ggplot(d(), aes(x=year_acquired, y=counts, color=Department)) +
-            geom_line(size = 1.15) + 
+            geom_line(size = 1.02) + 
             theme_bw() +
             xlab("Year") +
             ylab("Number of Pieces Acquired") +
-            ggtitle("Types of Artwork Acquired over time")
+            ggtitle("Types of Artwork Acquired over time") +
+            theme(plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
+            legend.title=element_blank(), 
+            legend.text=element_text(size=14))
     })
     
     
