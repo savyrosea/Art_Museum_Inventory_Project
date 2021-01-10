@@ -10,8 +10,7 @@ library(memoise)
 library(data.table)
 library(scales)
 library(treemap)
-#library(hrbrthemes)
-#library(circlepackeR) 
+
 options(scipen = 999)
 
 
@@ -82,10 +81,16 @@ Artist_Counts$percents <- (as.numeric(as.character(Artist_Counts$Number_Artists)
 
 
 
+
+
 #Reading in Mediums by decades df
-#Mediums_By_Decade <- read.csv(file = 'data/Mediums_By_Decade_temp.csv')
 Mediums_By_Decade <- fread("data/Mediums_By_Decade_temp.csv", header = TRUE)
 #View(Mediums_By_Decade)
+
+
+
+
+
 
 
 
@@ -116,6 +121,10 @@ final_m = as.matrix(myDTM1)
 sort(rowSums(final_m), decreasing = TRUE)
 
 d1 <- data.frame(final_m)
+
+
+
+
 
 
 
@@ -154,7 +163,7 @@ col1 <- c("fef3d9","#add8e6",
           "#ffa07a","#ceead1",
           "#ece1d4","#d0b3db")
 
-#data_to_combine <- data.frame(Nationality, Region, Nat_Counts)
+
 data_to_combine <- data.frame(Nationality, Region, n, col1)
 
 sun_df <- rbind(sun_df2,data_to_combine)

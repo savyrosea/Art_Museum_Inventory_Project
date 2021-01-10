@@ -2,90 +2,81 @@
 shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    
                    
-                   # ********** 0. ABOUT TAB **********
+                   # ********** 1. ABOUT TAB **********
                    tabPanel("ABOUT", 
-                            sidebarPanel(
-                              selectInput("decade_selection",
-                                          "Choose a decade:",
-                                          choices = c("1930s" = "1",
-                                                      "1940s" = "2",
-                                                      "1950s" = "3",
-                                                      "1960s" = "4",
-                                                      "1970s" = "5",
-                                                      "1980s" = "6",
-                                                      "1990s" = "7",
-                                                      "2000s" = "8",
-                                                      "2010s" = "9")),
-                              hr(),
-                              sliderInput("freq",
-                                          "Minimum Frequency:",
-                                          min = 1,  max = 50, value = 20),
-                              sliderInput("max",
-                                          "Maximum Number of Words:",
-                                          min = 1,  max = 300,  value = 200)
-                            ),
-                            
-                            # Show Word Cloud
-                            mainPanel(
-                              h2("  Top Mediums Used by Decade"),
-                              plotOutput("wordcloud_plot",width = "500px", height="400px")
-                            )
+                        h2("About the App...")
                    ),
                    
                    
-                   
-                   # ********** 1. DISCREPANCIES IN THE DATA TAB **********
-                  # tabPanel("DISCREPANCIES IN DATA",
-                            #sidebarLayout(
-                             #   sidebarPanel(
-                              #      h2('Hi... text here')
-                               # ),
-                          #      mainPanel(
-                           #         h2('Hi... text here')
-                            #    )
-                            #)    
-                   #),
-                   
-                   
-                   
-              
                    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
-                   tabPanel("DIVERSITY OF ARTISTS AND ARTWORKS",
-                                  tabsetPanel(type = "tabs",
-                                              tabPanel("Artists", 
-                                                       plotOutput("Gender_Pie"),
-                                                       plotOutput("Age_Hist"),
-                                                       plotlyOutput("Nat_Sunburst")),
-                                              tabPanel("Artworks", 
-                                                       h2('categories'))
-                                  )
-                   ),
+                   tabPanel("DIVERSITY OF ARTISTS",
+                            fluidRow(
+                              column(width = 6,plotlyOutput("Nat_Sunburst")),
+                              column(width = 6,plotOutput("Artist_Lollipop"))
+                            ),
+                            fluidRow(
+                              column(width = 6,plotOutput("Age_Hist")),
+                              column(width = 6,plotOutput("Gender_Pie"))
+                              )),
                    
-                   
-                   
+
+                  
                    # ********** 3. TIME SERIES DATA TAB **********
-                   tabPanel("Data Over Time",
-                            sidebarLayout(
-                                sidebarPanel(
-                                  checkboxGroupInput("Dep_Input", "Classification",
-                                                     choices = c("Drawings & Prints",
-                                                                 "Photography",
-                                                                 "Architecture & Design",
-                                                                 "Painting & Sculpture",
-                                                                 "Media and Performance",
-                                                                 "Film"),
-                                                     selected = c("Drawings & Prints",
+                   tabPanel("DATA OVER TIME",
+                            tabsetPanel(
+                            tabPanel("Line Graph",
+                              sidebarLayout(
+                                  sidebarPanel(
+                                    checkboxGroupInput("Dep_Input", "Classification",
+                                                       choices = c("Drawings & Prints",
+                                                                   "Photography",
+                                                                   "Architecture & Design",
+                                                                   "Painting & Sculpture",
+                                                                   "Media and Performance",
+                                                                   "Film"),
+                                                       selected = c("Drawings & Prints",
                                                                   "Photography")),
-                                  
-                                ),
+                                  ),
                                 mainPanel(
                                   plotOutput("Dep_plot")
                                 )
-                            )    
-                   ),
+                            )),
+                            
+                            tabPanel("Word Cloud",
+                                     sidebarPanel(
+                                       selectInput("decade_selection",
+                                                   "Choose a decade:",
+                                                   choices = c("1930s" = "1",
+                                                               "1940s" = "2",
+                                                               "1950s" = "3",
+                                                               "1960s" = "4",
+                                                               "1970s" = "5",
+                                                               "1980s" = "6",
+                                                               "1990s" = "7",
+                                                               "2000s" = "8",
+                                                               "2010s" = "9")),
+                                       hr(),
+                                       sliderInput("freq",
+                                                   "Minimum Frequency:",
+                                                   min = 1,  max = 50, value = 20),
+                                       sliderInput("max",
+                                                   "Maximum Number of Words:",
+                                                   min = 1,  max = 300,  value = 200)
+                                     ),
+                                     
+                                     # Show Word Cloud
+                                     mainPanel(
+                                       h2("  Top Mediums Used by Decade"),
+                                       plotOutput("wordcloud_plot",width = "500px", height="400px")
+                                       
+                                     ))
+                                     
+                   )),
                    
+                  
+                  
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
-                   tabPanel("IDENTIFYING SIMILAR ARTWORK",
+                   tabPanel("IDENTIFYING SIMILAR ARTWORK MEDIUMS",
                             sidebarLayout(
                                 sidebarPanel(
                                     h2('Hi... text here')
