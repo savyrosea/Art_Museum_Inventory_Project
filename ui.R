@@ -1,26 +1,26 @@
 
 shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
-                   
-                   
+                  
                    # ********** 1. ABOUT TAB **********
                    tabPanel("ABOUT", 
                         h2("About the App...")
                    ),
                    
-                   
                    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
                    tabPanel("DIVERSITY OF ARTISTS",
+                            #row with sunburst and lollipop
                             fluidRow(
                               column(width = 6,plotlyOutput("Nat_Sunburst")),
                               column(width = 6,plotOutput("Artist_Lollipop"))
                             ),
+                            fluidRow(h1(" ")),
+                            fluidRow(h1(" ")),
+                            #row with histogram and gender pie chart
                             fluidRow(
                               column(width = 6,plotOutput("Age_Hist")),
                               column(width = 6,plotOutput("Gender_Pie"))
                               )),
                    
-
-                  
                    # ********** 3. TIME SERIES DATA TAB **********
                    tabPanel("DATA OVER TIME",
                             tabsetPanel(
@@ -35,7 +35,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                                                    "Media and Performance",
                                                                    "Film"),
                                                        selected = c("Drawings & Prints",
-                                                                  "Photography")),
+                                                                  "Photography"))
                                   ),
                                 mainPanel(
                                   plotOutput("Dep_plot")
@@ -68,7 +68,6 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                      mainPanel(
                                        h2("  Top Mediums Used by Decade"),
                                        plotOutput("wordcloud_plot",width = "500px", height="400px")
-                                       
                                      ))
                                      
                    )),
