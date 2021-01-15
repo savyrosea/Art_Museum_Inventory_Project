@@ -14,7 +14,7 @@ shinyServer(function(input, output, session) {
         pie <- bp + coord_polar("y", start=0)
         
         pie + blank_theme +
-            labs(title = "  Gender of Artists") +
+            #labs(title = "  Gender of Artists") +
             theme(axis.text.x=element_blank(),
                   plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
                   legend.title=element_blank(), 
@@ -28,7 +28,7 @@ shinyServer(function(input, output, session) {
     output$Age_Hist <-renderPlot({
         ggplot(Date_Made_Years, aes(x=Age_when_made)) + 
             geom_histogram(color="black", fill="lightblue", binwidth=5) +
-            ggtitle("Age of Artist when Art was Made") +
+            #ggtitle("Age of Artist when Art was Made") +
             xlab("Age") +
             ylab("Number of Artists") +
             theme(plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
@@ -67,7 +67,7 @@ shinyServer(function(input, output, session) {
                         alpha=0.7, shape=21, stroke=2) +
             #theme_bw() +
             coord_flip() +
-            ggtitle("Artists with the Most Artwork in MOMA") +
+            #ggtitle("Artists with the Most Artwork in MOMA") +
             xlab("                 Number of Art Pieces") +
             ylab("Artist Name") +
             theme(
@@ -90,8 +90,8 @@ shinyServer(function(input, output, session) {
                 parents = sun_df$Region,
                 values = sun_df$n,
                 type = 'sunburst',
-                branchvalues = 'total')%>%
-            layout(title = "  Nationality of Artists")
+                branchvalues = 'total')
+            #layout(list(title = "Nationality of Artists", size = 5))
     )
     
     
@@ -127,7 +127,7 @@ shinyServer(function(input, output, session) {
         d2 <- final_m[,input$decade_selection]
         wordcloud(rownames(d1),
                   final_m[,as.numeric(input$decade_selection)],
-                  c(5,.15),input$freq,
+                  c(5,.5),input$freq,
                   input$max,TRUE,TRUE,.15,
                   colors=brewer.pal(8, "Dark2"))
     })

@@ -3,18 +3,35 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                   
                    # ********** 1. ABOUT TAB **********
                    tabPanel("ABOUT", 
-                        h2("About the App...")
+                        h1("About the App"),
+                        h6("_____________________________________"),
+                        h2("Dashboard"),
+                        h4("Some words about the dashboard"),
+                        h2("Plots Over Time"),
+                        h4("Some words about the Plots over time"),
+                        h2("Text Analysis"),
+                        h4("Some words about the text Analysis")
                    ),
                    
                    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
                    tabPanel("DIVERSITY OF ARTISTS",
                             #row with sunburst and lollipop
                             fluidRow(
+                              column(width = 1,h2('')),
+                              column(width = 4,h2('Nationality of Artist')),
+                              column(width = 3,h2('')),
+                              column(width = 4,h2('Artists with the Most Artwork in MOMA'))
+                                     ),
+                            fluidRow(
                               column(width = 6,plotlyOutput("Nat_Sunburst")),
                               column(width = 6,plotOutput("Artist_Lollipop"))
                             ),
-                            fluidRow(h1(" ")),
-                            fluidRow(h1(" ")),
+                            fluidRow(
+                              column(width = 1,h2('')),
+                              column(width = 4,h2('Age of Artist When Art was Made')),
+                              column(width = 3,h2('')),
+                              column(width = 4,h2('Gender of Artists'))
+                            ),
                             #row with histogram and gender pie chart
                             fluidRow(
                               column(width = 6,plotOutput("Age_Hist")),
@@ -67,7 +84,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                      # Show Word Cloud
                                      mainPanel(
                                        h2("  Top Mediums Used by Decade"),
-                                       plotOutput("wordcloud_plot",width = "500px", height="400px")
+                                       plotOutput("wordcloud_plot",width = "500px", height="500px")
                                      ))
                                      
                    )),
@@ -75,7 +92,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                   
                   
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
-                   tabPanel("IDENTIFYING SIMILAR ARTWORK MEDIUMS",
+                   tabPanel("ARTWORK MEDIUM TEXT ANALYSIS",
                             sidebarLayout(
                                 sidebarPanel(
                                     h2('Hi... text here')
