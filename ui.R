@@ -90,16 +90,13 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    )),
                    
                   
-                  
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
-                   tabPanel("ARTWORK MEDIUM TEXT ANALYSIS",
+                   tabPanel("MEDIUM TEXT ANALYSIS",
                             sidebarLayout(
-                                sidebarPanel(
-                                    h2('Hi... text here')
-                                ),
-                                mainPanel(
-                                    h2('Hi... text here')
-                                )
-                            )    
-                   )
+                              sidebarPanel(
+                                h2("sidebar here")
+                              ),
+                              mainPanel(
+                                h2("plot here")
+                              )))
 ))

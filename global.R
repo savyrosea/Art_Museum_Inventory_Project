@@ -133,3 +133,4 @@ myDTM1 = TermDocumentMatrix(myCorpus1, control = list(minWordLength = 1))
 final_m = as.matrix(myDTM1)
 sort(rowSums(final_m), decreasing = TRUE)
 d1 <- data.frame(final_m)
+#______________________________

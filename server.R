@@ -134,8 +134,6 @@ shinyServer(function(input, output, session) {
     
 
     # ********** 4. IDENTIFYING SIMILAR MEDIUMS TAB **********
-    
 
-    
-  
+
 })
