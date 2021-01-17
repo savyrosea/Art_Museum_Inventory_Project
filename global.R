@@ -134,3 +134,79 @@ final_m = as.matrix(myDTM1)
 sort(rowSums(final_m), decreasing = TRUE)
 d1 <- data.frame(final_m)
 #______________________________
+#setting up umap for text analysis
+library(data.table)
+library(tm)
+#library(tidyverse)
+#require(tm)
+#require(wordcloud)
+require(stringr)
+#require(tidyverse)
+source("text_utils.R")
+
+mediums_for_text_analysis <- fread('data/mediums_cleaned_for_text_analysis_classification.csv', header = TRUE)
+
+mediums_for_text_analysis <- mediums_for_text_analysis %>%
+  add_column(Medium2 = paste(mediums_for_text_analysis$Classification, mediums_for_text_analysis$Medium))
+
+#View(mediums_for_text_analysis)
+
+#number of rows used
+numberOfDocsUse = 1200
+
+#min number of times the word has to occur in
+requireNDocs=3
+
+MediumsCorpus <- Corpus(VectorSource(mediums_for_text_analysis$Medium2[1:numberOfDocsUse]))
+dtm <- DocumentTermMatrix(MediumsCorpus)
+ni <- rowSums(as.matrix(dtm))
+mj <- colSums(as.matrix(dtm))
+word.types <- names(mj)   # for convenience and clarity
+
+
+#extract the most frequent terms in the DTM
+freqterms<-findFreqTerms(dtm,lowfreq=200)
+
+#Handling Rare Words
+#sort from most common to rare
+# orders the terms, o continas the term ids.
+o <- order(mj, decreasing=TRUE)   # biggest to smallest
+
+#Out-of-vocabulary = OOV
+#creating a list of words that appear less than # number of times
+dtm.oov <- dtm[,requireNDocs <= mj]
+
+#permanent OOV
+#converting dtm into regular numerical matrix (later needed for SVD)
+dtm.oov <- cbind(as.matrix(dtm.oov), rowSums(as.matrix(dtm[,mj < requireNDocs])))
+
+#________________________________________________________________
+
+library(uwot)
+#View(mediums_for_text_analysis)
+#umap dimensionality reduction
+art_umap <- umap(dtm.oov, n_sgd_threads = 'auto') %>%
+  as_tibble() %>% 
+  add_column(classification = mediums_for_text_analysis$Classification) %>%
+  add_column(title = mediums_for_text_analysis$Title) %>%
+  add_column(artist = mediums_for_text_analysis$Artist) %>%
+  add_column(id = mediums_for_text_analysis$ConstituentID) %>% 
+  add_column(medium = mediums_for_text_analysis$Medium) %>% 
+  add_column(thumbnail = mediums_for_text_analysis$ThumbnailURL)
+
+#art_umap %>% 
+#  ggplot(aes(x=V1, y =V2, color=classification)) + geom_point()
+
+#library(plotly)
+
+# text_fig <- art_umap %>%
+#   plot_ly(x = ~V1,
+#           y = ~V2,
+#           marker = list(size = 6.5),
+#           color = ~classification,
+#           hoverinfo = "text",
+#           hovertext = paste("Title: ", art_umap$title,
+#                             "<br> Artist: ", art_umap$artist,
+#                             "<br> Medium: ", art_umap$medium))
+# text_fig
+

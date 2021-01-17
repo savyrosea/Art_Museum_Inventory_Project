@@ -5,16 +5,16 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    tabPanel("ABOUT", 
                         h1("About the App"),
                         h6("_____________________________________"),
-                        h2("Dashboard"),
+                        h2("ARTISTS DASHBOARD"),
                         h4("Some words about the dashboard"),
-                        h2("Plots Over Time"),
+                        h2("ACQUISITION OVER TIME"),
                         h4("Some words about the Plots over time"),
-                        h2("Text Analysis"),
+                        h2("ARTWORK MEDIUMS TEXT ANALYSIS"),
                         h4("Some words about the text Analysis")
                    ),
                    
                    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
-                   tabPanel("DIVERSITY OF ARTISTS",
+                   tabPanel("ARTISTS DASHBOARD",
                             #row with sunburst and lollipop
                             fluidRow(
                               column(width = 1,h2('')),
@@ -39,7 +39,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                               )),
                    
                    # ********** 3. TIME SERIES DATA TAB **********
-                   tabPanel("DATA OVER TIME",
+                   tabPanel("ACQUISITION OVER TIME",
                             tabsetPanel(
                             tabPanel("Line Graph",
                               sidebarLayout(
@@ -91,12 +91,14 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    
                   
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
-                   tabPanel("MEDIUM TEXT ANALYSIS",
-                            sidebarLayout(
-                              sidebarPanel(
-                                h2("sidebar here")
-                              ),
-                              mainPanel(
-                                h2("plot here")
-                              )))
-))
+                   tabPanel("ARTWORK MEDIUMS TEXT ANALYSIS",
+                            dashboardHeader(title = "Popups"),
+                            dashboardSidebar(),
+                            dashboardBody(tags$head(tags$style(
+                              HTML("img.small-img {
+                              max-width: 75px;
+                                   }")
+                            )),
+                            plotlyOutput("hoverplot", height = "600px"),
+                            uiOutput(outputId = "image"))
+)))

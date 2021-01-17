@@ -135,5 +135,73 @@ shinyServer(function(input, output, session) {
 
     # ********** 4. IDENTIFYING SIMILAR MEDIUMS TAB **********
 
+    img_src <- reactiveValues()
+    
+    output$image <- renderUI({
+        tags$img(src = img_src$src)
+    })
+    
+    output$hoverplot <- renderPlotly({
+        plot_ly(
+            art_umap,
+            x         = ~ V1,
+            y         = ~ V2,
+            color = ~ classification,
+            marker = list(size = 6, cmap = 'Safe'),
+            type      = 'scatter',
+            mode      = 'markers',
+            hoverinfo = "text",
+            hovertext = paste("Title: ", art_umap$title,
+                              "<br> Artist: ", art_umap$artist,
+                              "<br> Medium: ", art_umap$medium),
+            #hoverinfo = 'none',
+            source = "hoverplotsource",
+            customdata = ~ thumbnail
+        ) %>%
+            event_register('plotly_hover') %>%
+            event_register('plotly_unhover')
+    })
+    
+    hover_event <- reactive({
+        event_data(event = "plotly_hover", source = "hoverplotsource")
+    })
+    
+    unhover_event <- reactive({
+        event_data(event = "plotly_unhover", source = "hoverplotsource")
+    })
+    
+    hoverplotlyProxy <- plotlyProxy("hoverplot", session)
+    
+    observeEvent(unhover_event(), {
+        hoverplotlyProxy %>%
+            plotlyProxyInvoke("relayout", list(images = list(NULL)))
+    })
+    
+    
+    # observeEvent(hover_event(), {
+    #     img_src$src <- hover_event()$customdata
+    # })
+    
+    observeEvent(hover_event(), {
+        hoverplotlyProxy %>%
+            plotlyProxyInvoke("relayout", list(images = list(
+                list(
+                    source = hover_event()$customdata,
+                    xref = "x",
+                    yref = "y",
+                    # Shift the coordinates if you are below the x-axis or to the right of the y-axis
+                    # For some reason the horizontal shift is bugged
+                    x = hover_event()$x - 2*(hover_event()$x > 0),
+                    y = hover_event()$y + 5*(hover_event()$y < 0),
+                    
+                    sizex = 5,
+                    sizey = 5,
+                    opacity = 1
+                )
+            )))
+    })
+    
 
+    
+    
 })
