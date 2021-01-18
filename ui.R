@@ -92,13 +92,13 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                   
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
                    tabPanel("ARTWORK MEDIUMS TEXT ANALYSIS",
-                            dashboardHeader(title = "Popups"),
+                            dashboardHeader(),
                             dashboardSidebar(),
-                            dashboardBody(tags$head(tags$style(
-                              HTML("img.small-img {
-                              max-width: 75px;
-                                   }")
-                            )),
-                            plotlyOutput("hoverplot", height = "600px"),
-                            uiOutput(outputId = "image"))
+                            dashboardBody(
+                              fluidRow(
+                                box(width = 8, plotlyOutput('plot')),
+                                
+                                box(width = 4, htmlOutput('image'))
+                              )
+                            )
 )))

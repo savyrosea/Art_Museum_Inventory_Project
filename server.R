@@ -4,7 +4,7 @@ shinyServer(function(input, output, session) {
     # Make the word cloud drawing predictable during a session
     
     
-    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
+    # ********** 2. DIVERSITY OF ARTISTS TAB **********
     
     # 2.1 Gender Pie Chart
     output$Gender_Pie <-renderPlot({
@@ -62,8 +62,8 @@ shinyServer(function(input, output, session) {
         ggplot(Artist_Counts, aes(x=artist_x, y=artist_y)) +
             geom_point(stat = "identity") + 
             geom_segment( aes(x=artist_x, xend=artist_x, y=0, yend=artist_y), size = 1) +
-            geom_point( size=5, color="red",
-                        fill=alpha("orange", 0.3),
+            geom_point( size=5, color="#ff5b1a",
+                        fill=alpha('#ffa07a', 0.8),
                         alpha=0.7, shape=21, stroke=2) +
             #theme_bw() +
             coord_flip() +
@@ -90,6 +90,7 @@ shinyServer(function(input, output, session) {
                 parents = sun_df$Region,
                 values = sun_df$n,
                 type = 'sunburst',
+                #colors = sun_df$col1,
                 branchvalues = 'total')
             #layout(list(title = "Nationality of Artists", size = 5))
     )
@@ -134,27 +135,25 @@ shinyServer(function(input, output, session) {
     
 
     # ********** 4. IDENTIFYING SIMILAR MEDIUMS TAB **********
-
     img_src <- reactiveValues()
     
     output$image <- renderUI({
         tags$img(src = img_src$src)
     })
     
-    output$hoverplot <- renderPlotly({
+    output$plot <- renderPlotly({
         plot_ly(
             art_umap,
             x         = ~ V1,
             y         = ~ V2,
-            color = ~ classification,
-            marker = list(size = 6, cmap = 'Safe'),
             type      = 'scatter',
             mode      = 'markers',
-            hoverinfo = "text",
+            marker = list(size = 6.5),
+            color = ~ classification,
+            hoverinfo = 'text',
             hovertext = paste("Title: ", art_umap$title,
                               "<br> Artist: ", art_umap$artist,
                               "<br> Medium: ", art_umap$medium),
-            #hoverinfo = 'none',
             source = "hoverplotsource",
             customdata = ~ thumbnail
         ) %>%
@@ -178,28 +177,11 @@ shinyServer(function(input, output, session) {
     })
     
     
-    # observeEvent(hover_event(), {
-    #     img_src$src <- hover_event()$customdata
-    # })
-    
     observeEvent(hover_event(), {
-        hoverplotlyProxy %>%
-            plotlyProxyInvoke("relayout", list(images = list(
-                list(
-                    source = hover_event()$customdata,
-                    xref = "x",
-                    yref = "y",
-                    # Shift the coordinates if you are below the x-axis or to the right of the y-axis
-                    # For some reason the horizontal shift is bugged
-                    x = hover_event()$x - 2*(hover_event()$x > 0),
-                    y = hover_event()$y + 5*(hover_event()$y < 0),
-                    
-                    sizex = 5,
-                    sizey = 5,
-                    opacity = 1
-                )
-            )))
+        img_src$src <- hover_event()$customdata
     })
+    
+  
     
 
     

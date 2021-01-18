@@ -72,9 +72,9 @@ sun_df2 <- Moma_Artworks%>%
 index <- c('Asia','Africa','Middle East',
            'North and South America',
            'Europe', 'Australia and Pacific')
-values <- c("fef3d9","#add8e6",
+values <- c("#fef3d9","#add8e6",
             "#ffa07a","#ceead1",
-            "3ece1d4","#d0b3db")
+            "#3ece1d4","#d0b3db")
 
 sun_df2$col1 <- values[match(sun_df2$Region, index)]
 Nationality <- c('Asia','Africa','Middle East',
@@ -85,14 +85,14 @@ Region <- c("","","",
             "","","")
 
 n <- c(2834,1155,517,60784,53514,257)
-col1 <- c("fef3d9","#add8e6",
+col1 <- c("#fef3d9","#add8e6",
           "#ffa07a","#ceead1",
           "#ece1d4","#d0b3db")
 
 data_to_combine <- data.frame(Nationality, Region, n, col1)
 sun_df <- rbind(sun_df2,data_to_combine)
 
-
+#View(sun_df)
 
 # ***************** Line Plot Prep *****************
 #Making Counts by Class and year df
