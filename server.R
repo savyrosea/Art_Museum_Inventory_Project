@@ -46,16 +46,17 @@ shinyServer(function(input, output, session) {
             summarize(n=n())
         Artist_Counts <- filter(Artist_Counts, n>850)
         Artist_Counts[1,1] <- "Eugene Atget"
-        Artist_Counts$Artist <- factor(Artist_Counts$Artist,levels = c("Eugene Atget",
-                                                                       "Louise Bourgeois",
-                                                                       "Ludwig Mies van der Rohe",
-                                                                       "Jean Dubuffet",
-                                                                       "Lee Friedlander",
-                                                                       "Pablo Picasso",
-                                                                       "Marc Chagall",
-                                                                       "Henri Matisse",
-                                                                       "Pierre Bonnard",
-                                                                       "Frank Lloyd Wright"))
+        Artist_Counts$Artist <- factor(Artist_Counts$Artist,
+                                       levels = c("Eugene Atget",
+                                                  "Louise Bourgeois",
+                                                  "Ludwig Mies van der Rohe",
+                                                  "Jean Dubuffet",
+                                                  "Lee Friedlander",
+                                                  "Pablo Picasso",
+                                                  "Marc Chagall",
+                                                  "Henri Matisse",
+                                                  "Pierre Bonnard",
+                                                  "Frank Lloyd Wright"))
         artist_x <- Artist_Counts$Artist
         artist_y <- Artist_Counts$n
         # Plot
@@ -85,14 +86,11 @@ shinyServer(function(input, output, session) {
     # 2.4 Sunburst Chart
     output$Nat_Sunburst <- renderPlotly(
         plot_ly(sun_df,
-                #ids = sun_df$Nationality,
                 labels = sun_df$Nationality,
                 parents = sun_df$Region,
                 values = sun_df$n,
                 type = 'sunburst',
-                #colors = sun_df$col1,
                 branchvalues = 'total')
-            #layout(list(title = "Nationality of Artists", size = 5))
     )
     
     
@@ -157,7 +155,10 @@ shinyServer(function(input, output, session) {
             source = "hoverplotsource",
             customdata = ~ thumbnail
         ) %>%
-        layout(showlegend = TRUE, legend = list(font = list(size = 14))) %>% 
+        layout(hoverlabel = list(font = list(color = "black", 
+                                             family="sans serif", 
+                                             size = 16))) %>% 
+        layout(showlegend = TRUE, legend = list(font = list(size = 16))) %>% 
             event_register('plotly_hover') %>%
             event_register('plotly_unhover')
     })
