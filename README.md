@@ -5,17 +5,16 @@
 
 ###### For this project I am completing an inventory analysis on the art collection at the Museum of Modern Art (MOMA). The purpose of this R-Shiny app is to allow the museum or an art dealer to look at an inventory of artworks and be able to determine the following things.
 
-###### 1)	Look at discrepancies in their dataset so they can go back and fix it. For example, for a few artworks in the dataset the date the piece was made is before the date the artist is born. The museum could then go back and investigate entries like these.
 
-###### 2)	Look at the diversity of Artists (Nationality and Gender) and Artworks (Category and Medium). This will be useful if the museum wants to put together similar pieces for a display (such as a display of Australian Art or a display of Paintings from the 1940's). This will also be useful so that the museum can decide which types of art to acquire so that they have a more diverse inventory.
+###### 1) Create a dashboard demonstrating the diversity of the artists represented in MOMA.	Look at the diversity of Artists (Nationality and Gender) . This will be useful if the museum wants to put together similar pieces for a display (such as a display of Australian Art or a display of Paintings from the 1940's). This will also be useful so that the museum can decide which types of art to acquire so that they have a more diverse inventory.
+
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG)
 
 ###### 3)	Look at time series data. This could show what type or how much art was acquired by decade or year.
 
-###### 4)	Look at identifying similar art pieces. Using K-nearest neighbors I could demonstrate how unique a piece of art is based on how far away from its neighbors it is. I could also use k-nearest neighbors to show similar art pieces given an art piece. The data set has a link to a thumbnail for each piece of art so I hope to display some of the art predictions within the R-Shiny app.
+###### 4)	Look at identifying similar art pieces using text mining on the artwork's medium description
 
-###### 5)	Provide accurate summary information for museum visitors and donors. This will enable them to effectively recruit new donors.
 
-###### I hope to make a separate page on the website for each of these things, but I realize I probably will not get to all of them due to time restraints.
 
 ## **Motivation**
 
