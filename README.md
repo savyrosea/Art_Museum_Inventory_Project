@@ -10,11 +10,17 @@
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG)
 
-###### 3)	Look at time series data. This could show what type or how much art was acquired by decade or year.
+###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year.
 
-###### 4)	Look at identifying similar art pieces using text mining on the artwork's medium description
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/line.PNG)
 
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/wordcloud1.PNG)
 
+###### 3)	Look at identifying similar art pieces using text mining on the artwork's medium description
+
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter1.PNG)
+
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter2.PNG)
 
 ## **Motivation**
 
