@@ -1,10 +1,12 @@
 # **Art_Museum_Midcourse_Project**
-## Midcourse Project - Savannah Sew-Hee
+##  Savannah Sew-Hee
+
+
+
 
 ## **Executive Summary**
 
 ###### For this project I am completing an inventory analysis on the art collection at the Museum of Modern Art (MOMA). The purpose of this R-Shiny app is to allow the museum or an art dealer to look at an inventory of artworks and be able to determine the following things.
-
 
 ###### 1) Create a dashboard demonstrating the diversity of the artists represented in MOMA.	Look at the diversity of Artists (Nationality and Gender) . This will be useful if the museum wants to put together similar pieces for a display (such as a display of Australian Art or a display of Paintings from the 1940's). This will also be useful so that the museum can decide which types of art to acquire so that they have a more diverse inventory.
 
@@ -22,24 +24,33 @@
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter2.PNG)
 
-## **Motivation**
+By doing this inventory analysis, I can take what I have learned and made for this R shiny app and apply it to a company's data set of their products in order to help a company visualized the products they have, discrepancies in their dataset, and suggest new unique products to add to their collection.
 
-###### I like making and observing art, so I personally found this dataset interesting. I wanted to find a dataset that interested me, and then do analysis that another company might find useful for their dataset as well. By doing this inventory analysis, I can take what I have learned and made for this R shiny app and apply it to a company's data set of their products in order to help a company visualized the products they have, discrepancies in their dataset, and suggest new unique products to add to their collection.
 
-## **Data Question**
-
-###### Are their contradictions in their dataset they should go back and update?
-###### How diverse is MOMA's collection of artwork?
-###### How does the artwork MOMA has acquired change from decade to decade?
-###### What pieces of art are the most similar to other and which are the most unique?
-
+## **Why is this App Useful?**
+###### This app can be used by many people associated with the art museum world (beyond your everyday art enthusist like myself). 
+###### Archivists - Catalog art pieces by medium and record artwork as it has been acquired over time
+###### Curators - Identify similar art pieces based on medium to create a exhibition
+###### Donors - View a summary of the art collection before making a donation
 
 ## **Data Sources**
 ###### https://github.com/MuseumofModernArt/collection
  
 ###### This is the official Museum of Modern Art's GitHub and has two csv's (one on artworks and one on artists) that are taken directly from the Museum of Modern Art's API and are updated monthly.
 
-## **Known Issues and Challenges**
+
+
+## **Data Questions**
+
+###### What does the population of artists represented at MOMA look like?
+###### How has MOMA's artwork acquisition changed over time?
+###### Can we use text mining to find similar artworks based on the description of the art medium used?
+
+
+
+
+
+## **Issues and Challenges**
 
 ###### 1)	It will be difficult to clean some of the text columns. For example,
 ###### .	Artist Column has some entries with more than one artist (up to 48 artists) which also means Artist Birth column has more than one year in it
