@@ -1,48 +1,85 @@
 
-shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
+shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = TRUE,
                   
                    # ********** 1. ABOUT TAB **********
                    tabPanel("ABOUT", 
                         h1("About the App"),
-                        h6("_____________________________________"),
-                        h2("ARTISTS DASHBOARD"),
-                        h4("Some words about the dashboard"),
-                        h2("ACQUISITION OVER TIME"),
-                        h4("Some words about the Plots over time"),
-                        h2("ARTWORK MEDIUMS TEXT ANALYSIS"),
-                        h4("Some words about the text Analysis")
+                        tags$hr(style="border-bottom:12px; border-color: SteelBlue;"),
+                        fluidRow(
+                          column(width = 2,h5("")),
+                          column(width = 4,img(src = "starry_night.png", height = 280, width = 390)),
+                          column(width = 4,h2("ARTISTS DASHBOARD"),
+                                 h3("The ARTISTS DASHBOARD tab is designed to provide a snapshot 
+                                 of the artists represented in MOMA. This dashboard provides 
+                                 information on the the 
+                                 artists' nationality, gender, and age when art was created as 
+                                 well as displaying which artists 
+                                 have the most pieces in MOMA's inventory.")),
+                          column(width = 2,h5(""))
+                        ),
+                        tags$hr(style="border-color: SteelBlue;"),
+                        fluidRow(
+                          column(width = 2,h5("")),
+                          column(width = 4,
+                                 h2("ACQUISITION OVER TIME"),
+                                 h3("The ACQUISITION OVER TIME tab allows user to view how the 
+                                 quantity and mediums of the museum pieces acquired by year. 
+                                 The line plot displays the number of pieces acquired 
+                                 in each MOMA classification by year, and the wordcloud 
+                                    displays the top mediums of the artworks aqcuired by decade.")),
+                          column(width = 1,h5("")),
+                          column(width = 4,img(src = "picasso.png", height = 400, width = 285)),
+                          column(width = 1,h5(""))
+                        ),
+                        tags$hr(style="border-color: SteelBlue;"),
+                        
+                        fluidRow(
+                          column(width = 2,h5("")),
+                          column(width = 4,img(src = "boat.png", height = 300, width = 410)),
+                          column(width = 4,h2("ARTWORK MEDIUM TEXT ANALYSIS"),
+                                 h3("The ARTWORK MEDIUM TEXT ANALYSIS tab is designed for the 
+                                    user to explore similar pieces of art using text analysis 
+                                    of the medium description MOMA provides for each piece of art.")),
+                          column(width = 2,h5(""))
+                        ),
+                        tags$hr(style="border-color: SteelBlue;")
+                        
                    ),
                    
                    # ********** 2. DIVERSITY OF ARTISTS AND ARTWORKS TAB **********
                    tabPanel("ARTISTS DASHBOARD",
                             #row with sunburst and lollipop
                             fluidRow(
-                              column(width = 1,h2('')),
-                              column(width = 4,h2('Nationality of Artist')),
-                              column(width = 3,h2('')),
-                              column(width = 4,h2('Artists with the Most Artwork in MOMA'))
+                              column(width = 2,h2('')),
+                              column(width = 3,h2('Nationality of Artist')),
+                              column(width = 2,h2('')),
+                              column(width = 4,h2('Artists with the Most Artwork in MOMA')),
+                              column(width = 1,h2(''))
                                      ),
                             fluidRow(
                               column(width = 6,plotlyOutput("Nat_Sunburst")),
-                              column(width = 6,plotOutput("Artist_Lollipop"))
+                              column(width = 5,plotOutput("Artist_Lollipop")),
+                              column(width = 1,h2(''))
                             ),
                             fluidRow(
-                              column(width = 1,h2('')),
-                              column(width = 4,h2('Age of Artist When Art was Made')),
-                              column(width = 3,h2('')),
-                              column(width = 4,h2('Gender of Artists'))
+                              column(width = 2,h2('')),
+                              column(width = 3,h2('Age of Artist When Art was Made')),
+                              column(width = 2,h2('')),
+                              column(width = 3,h2('Gender of Artists')),
+                              column(width = 2,h2(''))
                             ),
                             #row with histogram and gender pie chart
                             fluidRow(
-                              column(width = 6,plotOutput("Age_Hist")),
+                              column(width = 2,h2('')),
+                              column(width = 4,plotOutput("Age_Hist")),
                               column(width = 6,plotOutput("Gender_Pie"))
-                              )),
+                              )
+                            ),
                    
                    # ********** 3. TIME SERIES DATA TAB **********
                    tabPanel("ACQUISITION OVER TIME",
                             tabsetPanel(
                             tabPanel("Line Graph",
-                              sidebarLayout(
                                   sidebarPanel(
                                     checkboxGroupInput("Dep_Input", "Classification",
                                                        choices = c("Drawings & Prints",
@@ -55,8 +92,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                                                   "Photography"))
                                   ),
                                 mainPanel(
-                                  plotOutput("Dep_plot")
-                                )
+                                    plotOutput("Dep_plot", height = 500, width = 850)
                             )),
                             
                             tabPanel("Word Cloud",
@@ -83,7 +119,7 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                                      
                                      # Show Word Cloud
                                      mainPanel(
-                                       h2("  Top Mediums Used by Decade"),
+                                       h2("  Top Mediums Acquired by Decade"),
                                        plotOutput("wordcloud_plot",width = "500px", height="500px")
                                      ))
                                      
@@ -91,13 +127,17 @@ shinyUI(navbarPage(title = "Art Museum Project", inverse = TRUE,
                    
                   
                    # ********** 4. IDENTIFYING SIMILAR ARTWORKS TAB **********
-                   tabPanel("ARTWORK MEDIUMS TEXT ANALYSIS",
+                   tabPanel("ARTWORK MEDIUM TEXT ANALYSIS",
                             dashboardHeader(),
                             dashboardSidebar(),
                             dashboardBody(
                               fluidRow(
-                                box(width = 8, plotlyOutput('plot')),
-                                
+                                box(width = 1, h2('')),
+                                box(width = 11, h2("Text Analysis of Artwork Mediums"))
+                              ),
+                              fluidRow(
+                                box(width = 1, h2('')),
+                                box(width = 7, plotlyOutput('plot')),
                                 box(width = 4, htmlOutput('image'))
                               )
                             )

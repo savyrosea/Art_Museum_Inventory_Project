@@ -148,7 +148,7 @@ shinyServer(function(input, output, session) {
             y         = ~ V2,
             type      = 'scatter',
             mode      = 'markers',
-            marker = list(size = 6.5),
+            marker = list(size = 6),
             color = ~ classification,
             hoverinfo = 'text',
             hovertext = paste("Title: ", art_umap$title,
@@ -157,6 +157,7 @@ shinyServer(function(input, output, session) {
             source = "hoverplotsource",
             customdata = ~ thumbnail
         ) %>%
+        layout(showlegend = TRUE, legend = list(font = list(size = 14))) %>% 
             event_register('plotly_hover') %>%
             event_register('plotly_unhover')
     })

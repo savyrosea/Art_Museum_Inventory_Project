@@ -10,6 +10,9 @@ library(memoise)
 library(data.table)
 library(scales)
 library(treemap)
+library(data.table)
+require(stringr)
+library(uwot)
 
 #disabling scientific notation
 options(scipen = 999)
@@ -19,10 +22,11 @@ options(scipen = 999)
 # ***************** Loading in Data *****************
 #Load in MOMA Data
 Moma_Artworks <- read.csv(file = 'data/Moma_Artworks_Cleaned.csv')
-#View(Moma_Artworks)
 Moma_Artists <- read.csv(file = 'data/Moma_Artists_Cleaned.csv')
 #Reading in Mediums by decades df
 Mediums_By_Decade <- fread("data/Mediums_By_Decade_temp.csv", header = TRUE)
+#Reading in Mediums for text analysis
+mediums_for_text_analysis <- fread('data/mediums_cleaned_for_text_analysis_classification.csv', header = TRUE)
 
 
 
@@ -39,8 +43,7 @@ blank_theme <- theme_minimal()+
     axis.title.y = element_blank(),
     panel.border = element_blank(),
     panel.grid=element_blank(),
-    axis.ticks = element_blank(),
-    #plot.title=element_text(size=14, face="bold")
+    axis.ticks = element_blank()
   )
 
 
@@ -92,7 +95,7 @@ col1 <- c("#fef3d9","#add8e6",
 data_to_combine <- data.frame(Nationality, Region, n, col1)
 sun_df <- rbind(sun_df2,data_to_combine)
 
-#View(sun_df)
+
 
 # ***************** Line Plot Prep *****************
 #Making Counts by Class and year df
@@ -133,23 +136,13 @@ myDTM1 = TermDocumentMatrix(myCorpus1, control = list(minWordLength = 1))
 final_m = as.matrix(myDTM1)
 sort(rowSums(final_m), decreasing = TRUE)
 d1 <- data.frame(final_m)
-#______________________________
-#setting up umap for text analysis
-library(data.table)
-library(tm)
-#library(tidyverse)
-#require(tm)
-#require(wordcloud)
-require(stringr)
-#require(tidyverse)
-source("text_utils.R")
 
-mediums_for_text_analysis <- fread('data/mediums_cleaned_for_text_analysis_classification.csv', header = TRUE)
 
+
+
+# ***************** Text Analysis Prep ****************
 mediums_for_text_analysis <- mediums_for_text_analysis %>%
   add_column(Medium2 = paste(mediums_for_text_analysis$Classification, mediums_for_text_analysis$Medium))
-
-#View(mediums_for_text_analysis)
 
 #number of rows used
 numberOfDocsUse = 1200
@@ -158,10 +151,13 @@ numberOfDocsUse = 1200
 requireNDocs=3
 
 MediumsCorpus <- Corpus(VectorSource(mediums_for_text_analysis$Medium2[1:numberOfDocsUse]))
+MediumsCorpus <- tm_map(MediumsCorpus, removePunctuation)
+MediumsCorpus <- tm_map(MediumsCorpus, removeWords, c("a", "an", "the", "from", "with", "and"))
+
 dtm <- DocumentTermMatrix(MediumsCorpus)
 ni <- rowSums(as.matrix(dtm))
 mj <- colSums(as.matrix(dtm))
-word.types <- names(mj)   # for convenience and clarity
+word.types <- names(mj) 
 
 
 #extract the most frequent terms in the DTM
@@ -179,10 +175,9 @@ dtm.oov <- dtm[,requireNDocs <= mj]
 #permanent OOV
 #converting dtm into regular numerical matrix (later needed for SVD)
 dtm.oov <- cbind(as.matrix(dtm.oov), rowSums(as.matrix(dtm[,mj < requireNDocs])))
+#View(dtm.oov)
 
 #________________________________________________________________
-
-library(uwot)
 #View(mediums_for_text_analysis)
 #umap dimensionality reduction
 art_umap <- umap(dtm.oov, n_sgd_threads = 'auto') %>%
@@ -194,19 +189,4 @@ art_umap <- umap(dtm.oov, n_sgd_threads = 'auto') %>%
   add_column(medium = mediums_for_text_analysis$Medium) %>% 
   add_column(thumbnail = mediums_for_text_analysis$ThumbnailURL)
 
-#art_umap %>% 
-#  ggplot(aes(x=V1, y =V2, color=classification)) + geom_point()
-
-#library(plotly)
-
-# text_fig <- art_umap %>%
-#   plot_ly(x = ~V1,
-#           y = ~V2,
-#           marker = list(size = 6.5),
-#           color = ~classification,
-#           hoverinfo = "text",
-#           hovertext = paste("Title: ", art_umap$title,
-#                             "<br> Artist: ", art_umap$artist,
-#                             "<br> Medium: ", art_umap$medium))
-# text_fig
 
