@@ -53,13 +53,13 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                               column(width = 2,h2('')),
                               column(width = 3,h2('Nationality of Artist')),
                               column(width = 2,h2('')),
-                              column(width = 4,h2('Artists with the Most Artwork in MOMA')),
+                              column(width = 4,h2('Artists with the Most Art in MOMA')),
                               column(width = 1,h2(''))
                                      ),
                             fluidRow(
                               column(width = 6,plotlyOutput("Nat_Sunburst")),
-                              column(width = 5,plotOutput("Artist_Lollipop")),
-                              column(width = 1,h2(''))
+                              column(width = 4,plotOutput("Artist_Lollipop")),
+                              column(width = 2,h2(''))
                             ),
                             fluidRow(
                               column(width = 2,h2('')),
@@ -79,6 +79,33 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                    # ********** 3. TIME SERIES DATA TAB **********
                    tabPanel("ACQUISITION OVER TIME",
                             tabsetPanel(
+                              tabPanel("Word Cloud",
+                                       sidebarPanel(
+                                         selectInput("decade_selection",
+                                                     "Choose a decade:",
+                                                     choices = c("1930s" = "1",
+                                                                 "1940s" = "2",
+                                                                 "1950s" = "3",
+                                                                 "1960s" = "4",
+                                                                 "1970s" = "5",
+                                                                 "1980s" = "6",
+                                                                 "1990s" = "7",
+                                                                 "2000s" = "8",
+                                                                 "2010s" = "9")),
+                                         hr(),
+                                         sliderInput("freq",
+                                                     "Minimum Frequency:",
+                                                     min = 1,  max = 50, value = 20),
+                                         sliderInput("max",
+                                                     "Maximum Number of Words:",
+                                                     min = 1,  max = 300,  value = 200)
+                                       ),
+                                       
+                                       # Show Word Cloud
+                                       mainPanel(
+                                         h2("  Top Mediums Acquired by Decade"),
+                                         plotOutput("wordcloud_plot",width = "700px", height="400px")
+                                       )),
                             tabPanel("Line Graph",
                                   sidebarPanel(
                                     checkboxGroupInput("Dep_Input", "Classification",
@@ -92,36 +119,10 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                                                                   "Photography"))
                                   ),
                                 mainPanel(
-                                    plotOutput("Dep_plot", height = 500, width = 850)
-                            )),
+                                    plotOutput("Dep_plot", height = 480, width = 700)
+                            ))
                             
-                            tabPanel("Word Cloud",
-                                     sidebarPanel(
-                                       selectInput("decade_selection",
-                                                   "Choose a decade:",
-                                                   choices = c("1930s" = "1",
-                                                               "1940s" = "2",
-                                                               "1950s" = "3",
-                                                               "1960s" = "4",
-                                                               "1970s" = "5",
-                                                               "1980s" = "6",
-                                                               "1990s" = "7",
-                                                               "2000s" = "8",
-                                                               "2010s" = "9")),
-                                       hr(),
-                                       sliderInput("freq",
-                                                   "Minimum Frequency:",
-                                                   min = 1,  max = 50, value = 20),
-                                       sliderInput("max",
-                                                   "Maximum Number of Words:",
-                                                   min = 1,  max = 300,  value = 200)
-                                     ),
-                                     
-                                     # Show Word Cloud
-                                     mainPanel(
-                                       h2("  Top Mediums Acquired by Decade"),
-                                       plotOutput("wordcloud_plot",width = "500px", height="500px")
-                                     ))
+                            
                                      
                    )),
                    

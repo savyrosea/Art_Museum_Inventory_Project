@@ -47,16 +47,17 @@ shinyServer(function(input, output, session) {
         Artist_Counts <- filter(Artist_Counts, n>850)
         Artist_Counts[1,1] <- "Eugene Atget"
         Artist_Counts$Artist <- factor(Artist_Counts$Artist,
-                                       levels = c("Eugene Atget",
-                                                  "Louise Bourgeois",
-                                                  "Ludwig Mies van der Rohe",
-                                                  "Jean Dubuffet",
-                                                  "Lee Friedlander",
-                                                  "Pablo Picasso",
-                                                  "Marc Chagall",
-                                                  "Henri Matisse",
+                                       levels = c("Frank Lloyd Wright",
                                                   "Pierre Bonnard",
-                                                  "Frank Lloyd Wright"))
+                                                  "Henri Matisse",
+                                                  "Marc Chagall",
+                                                  "Pablo Picasso",
+                                                  "Lee Friedlander",
+                                                  "Jean Dubuffet",
+                                                  "Ludwig Mies van der Rohe",
+                                                  "Louise Bourgeois",
+                                                  "Eugene Atget"))
+        
         artist_x <- Artist_Counts$Artist
         artist_y <- Artist_Counts$n
         # Plot
@@ -69,8 +70,8 @@ shinyServer(function(input, output, session) {
             #theme_bw() +
             coord_flip() +
             #ggtitle("Artists with the Most Artwork in MOMA") +
-            xlab("                 Number of Art Pieces") +
-            ylab("Artist Name") +
+            xlab("Artist Name") +
+            ylab("Number of Art Pieces") +
             theme(
                 panel.grid.major.y = element_blank(),
                 panel.border = element_blank(),

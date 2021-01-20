@@ -29,14 +29,15 @@ Mediums_By_Decade <- fread("data/Mediums_By_Decade_temp.csv", header = TRUE)
 mediums_for_text_analysis <- fread('data/mediums_cleaned_for_text_analysis_classification.csv', header = TRUE)
 
 
-
 # ***************** Pie Chart Prep *****************
 #Getting Everything Prepped for the Gender Pie Chart
 genders <- Moma_Artworks %>% count(Gender)
+
 pie_gender_data <- data.frame(
   group=c('Male = 85.3%','Female = 14.7%','Non-Binary = 0.01%'),
   value=c(genders[2,2],genders[1,2],genders[3,2])
 )
+
 blank_theme <- theme_minimal()+
   theme(
     axis.title.x = element_blank(),
@@ -45,7 +46,6 @@ blank_theme <- theme_minimal()+
     panel.grid=element_blank(),
     axis.ticks = element_blank()
   )
-
 
 
 # ***************** Lolliop Graph Prep *****************
@@ -141,8 +141,10 @@ d1 <- data.frame(final_m)
 
 
 # ***************** Text Analysis Prep ****************
-mediums_for_text_analysis <- mediums_for_text_analysis %>%
-  add_column(Medium2 = paste(mediums_for_text_analysis$Classification, mediums_for_text_analysis$Medium))
+#adding classification to text analysis
+# mediums_for_text_analysis <- mediums_for_text_analysis %>%
+#   add_column(Medium2 = paste(mediums_for_text_analysis$Classification,
+#                              mediums_for_text_analysis$Medium))
 
 #number of rows used
 numberOfDocsUse = 1200
@@ -150,7 +152,7 @@ numberOfDocsUse = 1200
 #min number of times the word has to occur in
 requireNDocs=3
 
-MediumsCorpus <- Corpus(VectorSource(mediums_for_text_analysis$Medium2[1:numberOfDocsUse]))
+MediumsCorpus <- Corpus(VectorSource(mediums_for_text_analysis$Medium[1:numberOfDocsUse]))
 MediumsCorpus <- tm_map(MediumsCorpus, removePunctuation)
 MediumsCorpus <- tm_map(MediumsCorpus, removeWords, c("a", "an", "the", "from", "with", "and"))
 
