@@ -13,7 +13,7 @@
 
 <p float="left">
   <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG" width="400" />
-  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/lollipop.PNG" width="500" />
+  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/lollipop.PNG" width="700" />
 </p>
 
 ###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year. This can be viewed as a word cloud which focuses on a more aesthetically pleasing view of which artwork mediums were most acquired by decade.
