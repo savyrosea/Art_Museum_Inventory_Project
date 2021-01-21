@@ -11,7 +11,7 @@
 ###### 1) Create a dashboard demonstrating the diversity of the artists represented in MOMA.	Look at the diversity of Artists (Nationality and Gender) . This will be useful if the museum wants to put together similar pieces for a display (such as a display of Australian Art or a display of Paintings from the 1940's). This will also be useful so that the museum can decide which types of art to acquire so that they have a more diverse inventory.
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG)
-![sunburst](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.gif)
+![sunburst](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst2.gif)
 
 ###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year.
 
