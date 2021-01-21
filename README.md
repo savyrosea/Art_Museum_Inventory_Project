@@ -24,6 +24,8 @@
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter2.PNG)
 
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter3.PNG)
+
 By doing this inventory analysis, I can take what I have learned and made for this R shiny app and apply it to a company's data set of their products in order to help a company visualized the products they have, discrepancies in their dataset, and suggest new unique products to add to their collection.
 
 
