@@ -24,7 +24,7 @@
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/wordcloud1.PNG)
 
-##### 3)	Look at identifying similar art pieces using text mining on the artwork's medium description
+##### 3)	Look at identifying similar art pieces using text mining on the artwork's medium description. Using the description of mediums of each piece of artwork, I created a document term matrix (DTM) containing a count of words occurred in each medium description. I then mapped the DTM into two dimension using UMAP dimensionality reduction, and used the two numbers to plot each point as a scatter plot. This plot is intereactive and visually shows artworks with similar mediums based on their proximity.
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter4.PNG)
 
