@@ -6,21 +6,23 @@
 
 ## **Executive Summary**
 
-###### For this project I am completing an inventory analysis on the art collection at the Museum of Modern Art (MOMA). The purpose of this R-Shiny app is to allow the museum or an art dealer to look at an inventory of artworks and be able to determine the following things.
+###### For this project I am completing an inventory analysis on the art collection at the Museum of Modern Art (MOMA). This R shiny app is split into the following three categories:
 
-###### 1) Create a dashboard demonstrating the diversity of the artists represented in MOMA.	Look at the diversity of Artists (Nationality and Gender) . This will be useful if the museum wants to put together similar pieces for a display (such as a display of Australian Art or a display of Paintings from the 1940's). This will also be useful so that the museum can decide which types of art to acquire so that they have a more diverse inventory.
+###### 1) A dashboard demonstrating the diversity of the artists represented in MOMA.	This dashboard will display the artists nationality, gender, and age at time artwork was created. This dashboard will also provide a snapshot of which artists has the most pieces in MOMA's collection.
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG)
 
-###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year.
+###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year. This can be viewed as a word cloud which focuses on a more aesthetically pleasing view of which artwork mediums were most acquired by decade.
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/line.PNG)
+
+###### The user can also look at dataa over time using a line graph. This Line graph displays categories of art acquired by year. The line graph view of this data allows the user to views spikes in art collection, and well as which categories of art have been growing over time.
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/wordcloud1.PNG)
 
 ###### 3)	Look at identifying similar art pieces using text mining on the artwork's medium description
 
-![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter1.PNG)
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter4.PNG)
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter2.PNG)
 
