@@ -10,7 +10,11 @@
 
 ###### 1) A dashboard demonstrating the diversity of the artists represented in MOMA.	This dashboard will display the artists nationality, gender, and age at time artwork was created. This dashboard will also provide a snapshot of which artists has the most pieces in MOMA's collection.
 
-![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG)
+
+<p float="left">
+  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG" width="100" />
+  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/lollipop.PNG" width="100" />
+</p>
 
 ###### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year. This can be viewed as a word cloud which focuses on a more aesthetically pleasing view of which artwork mediums were most acquired by decade.
 
