@@ -20,7 +20,7 @@
 
 ###### 3)	Look at identifying similar art pieces using text mining on the artwork's medium description
 
-![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter1.PNG)
+![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter4.PNG)
 
 ![](https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/scatter2.PNG)
 
