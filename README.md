@@ -64,3 +64,11 @@
 ##### .	Artist Column has some entries with more than one artist (up to 48 artists) which also means Artist Birth column has more than one year in it
 ##### .	Year Made column is entered differently each time. For example: Dec. 2nd, 1955 or 1960-1962 or c. 1884
 ##### .	Some Artists are listed as being born after their artwork was created, after looking into this, I discovered that these cases are objects that an artist owned that where created before the artist was born.
+
+## **Process for Creating Scatter Plot and Plotting Artwork Mediums using Text Mining**
+##### 1) Took a sample size of 1200 unique mediums from my data set
+##### 2) Created a document term matrix (DTM) with the counts of each word used in each medium. At this step I also removed a list of stopword such as "from", "the", and "as". I used this article to help me create my DTM 
+#### https://cran.r-project.org/web/packages/text2vec/vignettes/text-vectorization.html
+#### http://www-stat.wharton.upenn.edu/~stine/mich/blalock/2_lsa.nb.html
+##### 3) I used the uwot package in R to preform, UMAP dimensionality reduction to map my DTM down to two dimesions. I uses the two numbers as x and y coordinates and plotting as a scatter plot to view similair artworks by medium description.
+#####
