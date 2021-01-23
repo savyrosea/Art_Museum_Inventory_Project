@@ -68,7 +68,8 @@
 ## **Process for Creating Scatter Plot and Plotting Artwork Mediums using Text Mining**
 ##### 1) Took a sample size of 1200 unique mediums from my data set
 ##### 2) Created a document term matrix (DTM) with the counts of each word used in each medium. At this step I also removed a list of stopword such as "from", "the", and "as". I used this article to help me create my DTM 
-#### https://cran.r-project.org/web/packages/text2vec/vignettes/text-vectorization.html
-#### http://www-stat.wharton.upenn.edu/~stine/mich/blalock/2_lsa.nb.html
+##### https://cran.r-project.org/web/packages/text2vec/vignettes/text-vectorization.html
+##### http://www-stat.wharton.upenn.edu/~stine/mich/blalock/2_lsa.nb.html
 ##### 3) I used the uwot package in R to preform, UMAP dimensionality reduction to map my DTM down to two dimesions. I uses the two numbers as x and y coordinates and plotting as a scatter plot to view similair artworks by medium description.
+##### https://cran.r-project.org/web/packages/uwot/uwot.pdf
 ##### (The code for this is found in Second_Round_Cleaning_in_R.R)
