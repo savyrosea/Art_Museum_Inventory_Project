@@ -40,26 +40,7 @@ shinyServer(function(input, output, session) {
     
     # 2.3 Lollipop Graph
     output$Artist_Lollipop <-renderPlot({
-        Artist_Counts <- Moma_Artworks%>%
-            select(Artist)%>%
-            group_by(Artist)%>%
-            summarize(n=n())
-        Artist_Counts <- filter(Artist_Counts, n>850)
-        Artist_Counts[1,1] <- "Eugene Atget"
-        Artist_Counts$Artist <- factor(Artist_Counts$Artist,
-                                       levels = c("Frank Lloyd Wright",
-                                                  "Pierre Bonnard",
-                                                  "Henri Matisse",
-                                                  "Marc Chagall",
-                                                  "Pablo Picasso",
-                                                  "Lee Friedlander",
-                                                  "Jean Dubuffet",
-                                                  "Ludwig Mies van der Rohe",
-                                                  "Louise Bourgeois",
-                                                  "Eugene Atget"))
         
-        artist_x <- Artist_Counts$Artist
-        artist_y <- Artist_Counts$n
         # Plot
         ggplot(Artist_Counts, aes(x=artist_x, y=artist_y)) +
             geom_point(stat = "identity") + 
@@ -78,7 +59,8 @@ shinyServer(function(input, output, session) {
                 axis.ticks.y = element_blank(),
                 plot.title = element_text(hjust = 0.5, size = 24, face="bold"),
                 axis.title.x = element_text(size = 16, face="bold"),
-                axis.title.y = element_text(size = 16, face="bold"),
+                axis.title.y=element_blank(),
+                #axis.title.y = element_text(size = 16, face="bold"),
                 axis.text.x = element_text(size = 16),
                 axis.text.y = element_text(size = 16)
             )
@@ -119,7 +101,9 @@ shinyServer(function(input, output, session) {
             axis.title.y = element_text(size = 16, face="bold"),
             axis.text.x = element_text(size = 16),
             axis.text.y = element_text(size = 16))
+ 
     })
+    
     
     # Wordcloud by decade plot
     output$wordcloud_plot <- renderPlot({
@@ -139,6 +123,12 @@ shinyServer(function(input, output, session) {
     output$image <- renderUI({
         tags$img(src = img_src$src)
     })
+    ax <- list(
+      title = "",
+      zeroline = FALSE,
+      showline = FALSE,
+      showticklabels = FALSE
+    )
     
     output$plot <- renderPlotly({
         plot_ly(
@@ -159,7 +149,7 @@ shinyServer(function(input, output, session) {
         layout(hoverlabel = list(font = list(color = "black", 
                                              family="sans serif", 
                                              size = 16))) %>% 
-        layout(showlegend = TRUE, legend = list(font = list(size = 16))) %>% 
+        layout(showlegend = TRUE, legend = list(font = list(size = 16)), xaxis = ax, yaxis = ax) %>% 
             event_register('plotly_hover') %>%
             event_register('plotly_unhover')
     })

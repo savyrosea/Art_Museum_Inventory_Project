@@ -53,25 +53,26 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                               column(width = 2,h2('')),
                               column(width = 3,h2('Nationality of Artist')),
                               column(width = 2,h2('')),
-                              column(width = 4,h2('Artists with the Most Art in MOMA')),
-                              column(width = 1,h2(''))
+                              column(width = 5,h2('Artists with the Most Art in MOMA'))
+                              #column(width = 1,h2(''))
                                      ),
                             fluidRow(
                               column(width = 6,plotlyOutput("Nat_Sunburst")),
-                              column(width = 4,plotOutput("Artist_Lollipop")),
-                              column(width = 2,h2(''))
+                              column(width = 5,plotOutput("Artist_Lollipop")),
+                              column(width = 1,h2(''))
                             ),
+                            h3(""),
                             fluidRow(
                               column(width = 2,h2('')),
-                              column(width = 3,h2('Age of Artist When Art was Made')),
-                              column(width = 2,h2('')),
+                              column(width = 4,h2('Artist Age When Art was Made')),
+                              column(width = 1,h2('')),
                               column(width = 3,h2('Gender of Artists')),
                               column(width = 2,h2(''))
                             ),
                             #row with histogram and gender pie chart
                             fluidRow(
-                              column(width = 2,h2('')),
-                              column(width = 4,plotOutput("Age_Hist")),
+                              column(width = 1,h2('')),
+                              column(width = 5,plotOutput("Age_Hist")),
                               column(width = 6,plotOutput("Gender_Pie"))
                               )
                             ),
