@@ -12,8 +12,8 @@
 
 
 <p float="left">
-  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG" width="400" />
-  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/lollipop.PNG" width="560" />
+  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/sunburst.PNG" width="390" />
+  <img src="https://github.com/savyrosea/Art_Museum_Midcourse_Project/blob/main/images/lollipop.PNG" width="540" />
 </p>
 
 ##### 2)	Look at time series data. This could show what type or how much art was acquired by decade or year. This can be viewed as a word cloud which focuses on a more aesthetically pleasing view of which artwork mediums were most acquired by decade.
@@ -71,4 +71,4 @@
 #### https://cran.r-project.org/web/packages/text2vec/vignettes/text-vectorization.html
 #### http://www-stat.wharton.upenn.edu/~stine/mich/blalock/2_lsa.nb.html
 ##### 3) I used the uwot package in R to preform, UMAP dimensionality reduction to map my DTM down to two dimesions. I uses the two numbers as x and y coordinates and plotting as a scatter plot to view similair artworks by medium description.
-#####
+##### (The code for this is found in Second_Round_Cleaning_in_R.R)
