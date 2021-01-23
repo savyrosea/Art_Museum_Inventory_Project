@@ -58,12 +58,9 @@
 
 
 
-## **Issues and Challenges**
+## **Data Cleaning Challenges**
 
-##### 1)	It will be difficult to clean some of the text columns. For example,
+##### Cleaning the data took some time. For example,
 ##### .	Artist Column has some entries with more than one artist (up to 48 artists) which also means Artist Birth column has more than one year in it
 ##### .	Year Made column is entered differently each time. For example: Dec. 2nd, 1955 or 1960-1962 or c. 1884
-##### .	Medium Column is a list describing each piece and each entry is very unique, I may need to do text analysis to do anything with it
-
-##### 2)	If I want to try to predict artwork using K-nearest neighbors, there is not a lot of numerical data to do this with (only dimension and year columns). I may need to find a way to predict using categorically using the region of the world or the classification of the artwork. If this takes too much time to learn I might not be able to pull this off, but I think there is still plenty of project here without it.
-##### 3)	I'm not sure if I can display the artwork thumbnails within my app or if this breaks some copyright rule.
+##### .	Some Artists are listed as being born after their artwork was created, after looking into this, I discovered that these cases are objects that an artist owned that where created before the artist was born.
