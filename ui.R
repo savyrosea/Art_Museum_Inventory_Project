@@ -7,8 +7,9 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                         tags$hr(style="border-bottom:12px; border-color: SteelBlue;"),
                         fluidRow(
                           column(width = 2,h5("")),
-                          column(width = 4,img(src = "starry_night.png", height = 280, width = 390)),
-                          column(width = 4,h2("ARTISTS DASHBOARD"),
+                          column(width = 4,img(src = "starry_night.PNG", height = 280, width = 390)),
+                          column(width = 1,h5("")),
+                          column(width = 3,h2("ARTISTS DASHBOARD"),
                                  h3("The ARTISTS DASHBOARD tab is designed to provide a snapshot 
                                  of the artists represented in MOMA. This dashboard provides 
                                  information on the the 
@@ -28,15 +29,16 @@ shinyUI(navbarPage(title = "MUSEUM OF MODERN ART INVENTORY ANALYSIS", inverse = 
                                  in each MOMA classification by year, and the wordcloud 
                                     displays the top mediums of the artworks aqcuired by decade.")),
                           column(width = 1,h5("")),
-                          column(width = 4,img(src = "picasso.png", height = 400, width = 285)),
+                          column(width = 4,img(src = "picasso.PNG", height = 400, width = 285)),
                           column(width = 1,h5(""))
                         ),
                         tags$hr(style="border-color: SteelBlue;"),
                         
                         fluidRow(
                           column(width = 2,h5("")),
-                          column(width = 4,img(src = "boat.png", height = 300, width = 410)),
-                          column(width = 4,h2("ARTWORK MEDIUM TEXT ANALYSIS"),
+                          column(width = 4,img(src = "boat.PNG", height = 300, width = 410)),
+                          column(width = 1,h5("")),
+                          column(width = 3,h2("ARTWORK MEDIUM TEXT ANALYSIS"),
                                  h3("The ARTWORK MEDIUM TEXT ANALYSIS tab is designed for the 
                                     user to explore similar pieces of art using text analysis 
                                     of the medium description MOMA provides for each piece of art.")),

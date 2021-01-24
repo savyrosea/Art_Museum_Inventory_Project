@@ -13,6 +13,7 @@ library(treemap)
 library(data.table)
 require(stringr)
 library(uwot)
+library(rsconnect)
 
 #disabling scientific notation
 options(scipen = 999)
