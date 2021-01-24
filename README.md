@@ -6,6 +6,8 @@
 
 ## **Executive Summary**
 
+#### R Shiny App for This Project: https://savyrosea.shinyapps.io/art_museum_midcourse_project/
+
 ##### For this project I am completing an inventory analysis on the art collection at the Museum of Modern Art (MOMA). This R shiny app is split into the following three categories:
 
 ##### 1) A dashboard demonstrating the diversity of the artists represented in MOMA.	This dashboard will display the artists nationality, gender, and age at time artwork was created. This dashboard will also provide a snapshot of which artists has the most pieces in MOMA's collection.
